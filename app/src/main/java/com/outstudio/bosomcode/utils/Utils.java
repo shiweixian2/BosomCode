@@ -17,6 +17,13 @@ public class Utils {
         String date = dateFormat.format(new Date());
         return date;
     }
+
+    public static String getDirDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+        String date = dateFormat.format(new Date());
+        return date;
+    }
+
     public static String getTime(){
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         String time = timeFormat.format(new Date());

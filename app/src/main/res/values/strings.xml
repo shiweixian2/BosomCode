@@ -70,4 +70,6 @@
     <string name="add_remind_before_meal_radio_text">饭 前</string>
     <string name="add_remind_after_meal_radio_text">饭 后</string>
     <string name="add_remind_add_medicine_bt_text">添 加 新 药 品</string>
+    <string name="add_remind_set_time_meal_tip_text">请选择饭前还是饭后:</string>
+    <string name="add_remind_set_time_add_time_text">点 击 添 加 用 药 时 间</string>
 </resources>

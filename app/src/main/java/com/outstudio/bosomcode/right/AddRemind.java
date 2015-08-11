@@ -1,7 +1,10 @@
 package com.outstudio.bosomcode.right;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Service;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +18,8 @@ import com.outstudio.bosomcode.utils.FileUtil;
 import com.outstudio.bosomcode.utils.Utils;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 
 /**
@@ -26,18 +31,20 @@ public class AddRemind extends Activity implements View.OnClickListener {
     private ImageButton calcelBt = null;
     private ImageButton confirmBt = null;
     private TextView timeText = null;
-    private EditText contentEdit1 = null;
+    private EditText contentEdit = null;
 //    private EditText amountEidt1 = null;
 //    private Button addMedicineBt = null;
     //文件夹名称
     private static final String directoryName = FileUtil.rootDirectory + "AddRemind" + File.separator;
     private File destDir = new File(directoryName);
 
+    public static final int REQUREST_CODE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_remind);
-        contentEdit1 = (EditText) findViewById(R.id.add_remind_edit);
+        contentEdit = (EditText) findViewById(R.id.add_remind_edit);
         setTimebt = (Button) findViewById(R.id.add_remind_time_bt);
         calcelBt = (ImageButton) findViewById(R.id.add_remind_cancel_bt);
         confirmBt = (ImageButton) findViewById(R.id.add_remind_confirm_bt);
@@ -45,7 +52,6 @@ public class AddRemind extends Activity implements View.OnClickListener {
 //        amountEidt1 = (EditText) findViewById(R.id.add_remind_amount_edit);
 //        addMedicineBt = (Button) findViewById(R.id.add_remind_add_medicine_bt);
         timeText.setText(Utils.getTime());
-        contentEdit1.setSelection(0);
         setTimebt.setOnClickListener(this);
         calcelBt.setOnClickListener(this);
         confirmBt.setOnClickListener(this);
@@ -58,18 +64,39 @@ public class AddRemind extends Activity implements View.OnClickListener {
      */
     private void manageFile() {
         FileUtil.getInstance().makeDir(destDir);
+        File file = new File(destDir.getAbsolutePath()+Utils.getDirDate());
+        try {
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(contentEdit.getText().toString());
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 设置闹钟
+     */
+    private void setAlarmClock(){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Service.ALARM_SERVICE);
 
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.add_remind_time_bt:
-                showTimeDialog();
+                intent = new Intent(AddRemind.this,SetTime.class);
+                startActivityForResult(intent, REQUREST_CODE);
                 break;
             case R.id.add_remind_cancel_bt:
+                this.finish();
                 break;
             case R.id.add_remind_confirm_bt:
+                manageFile();
+                this.finish();
                 break;
 //            case R.id.add_remind_add_medicine_bt:
 //                addLayout();
@@ -77,19 +104,14 @@ public class AddRemind extends Activity implements View.OnClickListener {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==REQUREST_CODE){
 
-    /**
-     * 设置时间的对话框
-     */
-    private void showTimeDialog() {
-        Calendar calendar = Calendar.getInstance();
-        new TimePickerDialog(AddRemind.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                timeText.setText(hourOfDay + ":" + minute);
-            }
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
+        }
     }
+
 
     //    /**
 //     * 添加一个LinearLayout布局
