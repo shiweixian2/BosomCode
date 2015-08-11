@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">BosomCode</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- 登录界面-->
+    <string name="login_tip_one">知 心 药 码</string>
+    <string name="login_tip_two">您    的    健    康    管    家</string>
+    <string name="login_username_hint">请输入您的邮箱号</string>
+    <string name="login_password_hint">请输入您的密码</string>
+    <string name="login_login_text">登       录</string>
+    <string name="login_register_text">注       册</string>
+    <string name="login_forget_password_text">忘 记 密 码 ？</string>
+
+    <!--注册界面-->
+    <string name="register_title">Make Health Healthy</string>
+    <string name="register_tip_one">我已阅读并同意</string>
+    <string name="register_tip_two">《知心药码服务条款》</string>
+    <string name="register_username_hint">请输入您的邮箱号</string>
+    <string name="register_password_hint_1">请输入密码</string>
+    <string name="register_password_hint_2">请再输入一次密码</string>
+    <string name="register_bt_text">立 即 注 册</string>
+    <string name="register_backto_login_text">返 回 登 录</string>
+
+    <!--注册成功界面-->
+    <string name="register_succeed_tip">恭喜您,注册成功!</string>
+    <string name="register_succeed_login_now_text">立 即 登 录</string>
+    <string name="register_succeed_login_other_way_text">使用其他账号登录</string>
+
+    <!--主界面-->
+    <string name="main_top_text">知 心 药 码</string>
+    <string name="main_bottom_tab1">个性资讯</string>
+    <string name="main_bottom_tab2">知心药码</string>
+    <string name="main_bottom_tab3">用药提醒</string>
+    <string name="center_fragment_scan_bt_text">扫码识药</string>
+    <string name="center_fragment_personnal_bt_text">私人专家</string>
+    <string name="center_fragment_share_bt_text">心得分享</string>
+    <string name="center_fragment_call_help_bt_text">一键呼救</string>
+    <string name="left_fragment_classify_bt_text">分类查看</string>
+    <string name="right_fragment_add_detector">添 加 用 药 提 醒</string>
+
+
+    <!--侧滑菜单界面-->
+    <string name="for_test">小娜</string>
+    <string name="slide_menu_collection">我的收藏</string>
+    <string name="slide_menu_medical_history">我的病史</string>
+    <string name="slide_menu_my_doctor">我的医生</string>
+    <string name="slide_menu_keep_health">养生良方</string>
+    <string name="slide_menu_cure_disease">治病灵药</string>
+    <string name="slide_menu_notice">通  知</string>
+    <string name="slide_menu_setting">设  置</string>
+
+    <!--心得分享界面-->
+    <string name="share_thought_edit_text">在这里写下您想要分享的内容吧</string>
+    <string name="share_thought_bt_text">分   享</string>
+
+    <!--一键呼救界面-->
+    <string name="call_help_add_name_tip_text">姓 名:</string>
+    <string name="call_help_phoneNumber_tip_text">联系电话(手机):</string>
+</resources>

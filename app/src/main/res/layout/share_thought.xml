@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:isScrollContainer="false"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3" >
+
+        <GridView
+            android:id="@+id/gridView_check_on"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="5dp"
+            android:numColumns="3"
+            android:verticalSpacing="10dp" >
+        </GridView>
+    </LinearLayout>
+
+    <!-- 为了不让edittext默认获取焦点，保证界面的美观性 -->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true" >
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/share_thought_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:gravity="start"
+            android:hint="@string/share_thought_edit_text" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/share_thought_camera"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/camera"
+                android:contentDescription="@string/app_name" />
+
+            <ImageButton
+                android:id="@+id/share_thought_load_local_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/add"
+                android:contentDescription="@string/app_name" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/share_thought_share_bt"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:background="@drawable/share_thought_bt_bg"
+        android:text="@string/share_thought_bt_text"
+        android:textSize="20sp"
+        android:layout_margin="2dp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

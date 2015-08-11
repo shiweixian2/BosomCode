@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:text="@string/register_title"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_username_icon"
+            android:scaleType="fitCenter" />
+
+        <com.outstudio.bosomcode.utils.MyEditText
+            android:id="@+id/register_username"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="@string/register_username_hint"
+            android:inputType="textPassword" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_password_icon"
+            android:scaleType="fitCenter" />
+
+        <com.outstudio.bosomcode.utils.MyEditText
+            android:id="@+id/register_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="@string/register_password_hint_1"
+            android:inputType="textPassword" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_password_icon"
+            android:scaleType="fitCenter" />
+
+        <com.outstudio.bosomcode.utils.MyEditText
+            android:id="@+id/register_pwd_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="@string/register_password_hint_2"
+            android:inputType="textPassword" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/chk_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:button="@null"
+            android:checked="true"
+            android:drawableLeft="@drawable/checkbox_bg"
+            android:drawablePadding="4dp"
+            android:padding="2dp"
+            android:gravity="right"
+            android:layout_gravity="right"
+            android:text="@string/register_tip_one"
+            android:textColor="#888888" />
+
+        <TextView
+            android:id="@+id/tv_medicine_serve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/register_tip_two"
+            android:textColor="#5858f8" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register_now_bt"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/login_login_bt_bg"
+        android:text="@string/register_bt_text"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/register_back_to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_backto_login_text"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="end"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+</LinearLayout>

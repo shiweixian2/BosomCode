@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ViewFlipper
+        android:id="@+id/center_fragment_view_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp">
+
+    </ViewFlipper>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp">
+
+
+        <Button
+            android:id="@+id/center_fragment_scanCode_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/center_fragment_scan_icon"
+            android:gravity="center"
+            android:text="@string/center_fragment_scan_bt_text"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+        <Button
+            android:id="@+id/center_fragment_personal_specialist_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/center_fragment_personal_icon"
+            android:gravity="center"
+            android:text="@string/center_fragment_personnal_bt_text"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp">
+
+        <Button
+            android:id="@+id/center_fragment_share_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="22dp"
+            android:background="@drawable/center_fragment_share_icon"
+            android:gravity="center"
+            android:text="@string/center_fragment_share_bt_text"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+        <Button
+            android:id="@+id/center_fragment_call_help_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="22dp"
+            android:background="@drawable/center_fragment_call_help_icon"
+            android:gravity="center"
+            android:text="@string/center_fragment_call_help_bt_text"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

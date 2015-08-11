@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="-2dp"
+    android:orientation="vertical">
+
+    <ViewFlipper
+        android:id="@+id/right_fragment_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/right_fragment_medicine_bg"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp">
+
+    </ViewFlipper>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <Button
+                android:id="@+id/right_fragment_add_remind_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/clear"
+                android:text="@string/right_fragment_add_detector"
+                android:textColor="@color/purple"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/right_fragment_remind_bt_icon"
+                android:scaleType="fitCenter" />
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/purple"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp" />
+
+
+        <ListView
+            android:id="@id/android:list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/light_purple"
+            android:fastScrollEnabled="true"
+            android:scrollingCache="true"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:dividerHeight="0.1dp"
+            android:scrollbars="none" />
+    </LinearLayout>
+
+</LinearLayout>

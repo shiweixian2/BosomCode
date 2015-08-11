@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <!--个人信息（头像，用户名）
+	我的收藏
+	我的病史（里面包含病史、过敏史）
+	心得分享
+	我的收藏
+	通知
+	设置-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <com.outstudio.bosomcode.utils.RoundHeadView
+            android:id="@+id/head_image_bt"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/head_image"
+            imagecontrol:border_thickness="1dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:text="@string/for_test"
+            android:textColor="@color/purple"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/slide_menu_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:divider="#D9D9D9"
+        android:dividerHeight="0.001dp"
+        android:fastScrollEnabled="true"
+        android:scrollbars="none"
+        android:scrollingCache="true">
+
+    </ListView>
+
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:descendantFocusability= "blocksDescendants"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_weight="2">
+        <ImageView
+            android:id="@+id/right_fragment_clock"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/right_fragment_morning_clock"/>
+        <TextView
+            android:id="@+id/right_fragment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="08:00"
+            android:textColor="@color/purple"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:id="@+id/right_fragment_meal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/purple"
+            android:textSize="18sp"
+            android:text="饭后"
+            android:layout_alignParentRight="true"/>
+    
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:layout_weight="1">
+    <ImageButton
+        android:id="@+id/right_fragment_edit_bt"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:focusable = "false"
+        android:background="@drawable/right_fragment_edit_normal_icon"/>
+    </LinearLayout>
+</LinearLayout>

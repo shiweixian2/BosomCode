@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    tools:context=".MainActivity">
+
+    <com.outstudio.bosomcode.utils.MyScrollView
+        android:id="@+id/slide_menu"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <include layout="@layout/slide_menu"/>
+            <!--接下来的-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/register_bg">
+                <include layout="@layout/main_tab"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.outstudio.bosomcode.utils.MyScrollView>
+
+
+</RelativeLayout>
