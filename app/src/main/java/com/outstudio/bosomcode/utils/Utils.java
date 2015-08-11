@@ -17,4 +17,9 @@ public class Utils {
         String date = dateFormat.format(new Date());
         return date;
     }
+    public static String getTime(){
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        String time = timeFormat.format(new Date());
+        return time;
+    }
 }

@@ -56,6 +56,18 @@
     <string name="share_thought_bt_text">分   享</string>
 
     <!--一键呼救界面-->
-    <string name="call_help_add_name_tip_text">姓 名:</string>
+    <string name="call_help_add_name_tip_text">医 生 姓 名:</string>
     <string name="call_help_phoneNumber_tip_text">联系电话(手机):</string>
+
+    <!--添加用药提醒-->
+    <string name="add_remind_content_tip_text">用 药 提 示:</string>
+    <string name="add_remind_content_tip2_text">请 填 写 药 品 名 称:</string>
+    <string name="add_remind_amount_tip_text">请填写份数:</string>
+    <string name="add_remind_content_hint">填 写 您 的 详 细 用 药 内 容</string>
+    <string name="add_remind_amount_hint">份 数</string>
+    <string name="add_remind_time_tip_text">用 药 时 间:</string>
+    <string name="add_remind_time_bt_text">点 击 设 置 用 药 时 间</string>
+    <string name="add_remind_before_meal_radio_text">饭 前</string>
+    <string name="add_remind_after_meal_radio_text">饭 后</string>
+    <string name="add_remind_add_medicine_bt_text">添 加 新 药 品</string>
 </resources>

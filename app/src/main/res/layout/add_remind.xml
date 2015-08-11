@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:isScrollContainer="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageButton
+            android:id="@+id/add_remind_cancel_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_launcher" />
+
+        <ImageButton
+            android:id="@+id/add_remind_confirm_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_launcher" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/add_remind_time_tip_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/add_remind_time_tip_text"
+                android:textColor="@color/purple"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/add_remind_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/add_remind_time_tip_text"
+                android:textColor="@color/purple"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/add_remind_before_meal_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/add_remind_after_meal_radio"
+                    android:text="@string/add_remind_before_meal_radio_text" />
+
+                <RadioButton
+                    android:id="@+id/add_remind_after_meal_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="2dp"
+                    android:checked="true"
+                    android:text="@string/add_remind_after_meal_radio_text" />
+            </RadioGroup>
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/add_remind_time_bt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/add_remind_time_bt_bg"
+            android:text="@string/add_remind_time_bt_text"
+            android:textColor="@color/purple" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_remind_content_tip_text"
+            android:textColor="@color/purple"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/add_remind_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@drawable/my_doctor_add_edit_bg"
+            android:hint="@string/add_remind_content_hint"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@color/black" />
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:text="@string/add_remind_content_tip2_text"-->
+        <!--android:textColor="@color/purple" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:text="@string/add_remind_amount_tip_text"-->
+        <!--android:textColor="@color/purple" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<EditText-->
+        <!--android:id="@+id/add_remind_edit"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_weight="4"-->
+        <!--android:background="@drawable/my_doctor_add_edit_bg"-->
+        <!--android:hint="@string/add_remind_content_hint"-->
+        <!--android:inputType="text"-->
+        <!--android:singleLine="true"-->
+        <!--android:textColor="@color/black" />-->
+
+        <!--<EditText-->
+        <!--android:id="@+id/add_remind_amount_edit"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@drawable/my_doctor_add_edit_bg"-->
+        <!--android:hint="@string/add_remind_amount_hint" />-->
+
+        <!--</LinearLayout>-->
+
+    </LinearLayout>
+    <!--<FrameLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp">-->
+
+    <!--<Button-->
+    <!--android:id="@+id/add_remind_add_medicine_bt"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/clear"-->
+    <!--android:text="@string/add_remind_add_medicine_bt_text"-->
+    <!--android:textColor="@color/purple"-->
+    <!--android:textSize="18sp" />-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="35dp"-->
+    <!--android:layout_height="35dp"-->
+    <!--android:layout_marginLeft="50dp"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:background="@drawable/right_fragment_remind_bt_icon"-->
+    <!--android:scaleType="fitCenter" />-->
+    <!--</FrameLayout>-->
+
+</LinearLayout>

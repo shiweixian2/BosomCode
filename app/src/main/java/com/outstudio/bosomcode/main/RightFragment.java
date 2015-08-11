@@ -1,5 +1,6 @@
 package com.outstudio.bosomcode.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ViewFlipper;
 
 import com.outstudio.bosomcode.R;
+import com.outstudio.bosomcode.right.AddRemind;
 import com.outstudio.bosomcode.utils.ListBtAdapter;
 
 import java.util.ArrayList;
@@ -78,6 +80,7 @@ public class RightFragment extends ListFragment implements View.OnClickListener 
         flipper.startFlipping();
         flipper.setOnClickListener(this);
         setListViewAdapter(listView);
+        addRemindBt.setOnClickListener(this);
     }
 
     /**
@@ -139,8 +142,12 @@ public class RightFragment extends ListFragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
-
+            case R.id.right_fragment_add_remind_bt:
+                intent = new Intent(getActivity(), AddRemind.class);
+                startActivity(intent);
+                break;
         }
     }
 }

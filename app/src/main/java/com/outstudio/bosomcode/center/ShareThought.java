@@ -16,7 +16,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.outstudio.bosomcode.R;
+import com.outstudio.bosomcode.utils.FileUtil;
 import com.outstudio.bosomcode.utils.GridAdapter;
 import com.outstudio.bosomcode.utils.PictureHelper;
 
@@ -50,9 +50,8 @@ public class ShareThought extends Activity implements OnClickListener {
     // 当前的时间
     private static String mTime = null;
     // 定义文件夹路径
-    public static final String directoryName = Environment
-            .getExternalStorageDirectory().toString() + "/BosomCode/ShareThought";// //
-    public static File destDir = new File(directoryName);
+    private static final String directoryName = FileUtil.rootDirectory + "ShareThought";
+    private File destDir = new File(directoryName);
     private File mImageFile = null;
     // 定义使用系统相机拍照的请求值
     private static final int photoFlag = 1;
@@ -76,7 +75,7 @@ public class ShareThought extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.share_thought); // //键盘遮挡在Man中设置
-        makeDir();
+        FileUtil.getInstance().makeDir(destDir);
         wm = this.getWindowManager();
         ScreenWidth = wm.getDefaultDisplay().getWidth();
         ScreenHeight = wm.getDefaultDisplay().getHeight();
@@ -86,7 +85,7 @@ public class ShareThought extends Activity implements OnClickListener {
         // 实例化GridView
         gridView = (GridView) findViewById(R.id.gridView_check_on);
         // 实例化EditText
-        signText = (EditText) findViewById(R.id.share_thought_edit);// //
+        signText = (EditText) findViewById(R.id.share_thought_edit);
         /*
          * 实例化Button
 		 */
@@ -182,28 +181,6 @@ public class ShareThought extends Activity implements OnClickListener {
         list.remove(position);
     }
 
-    /**
-     * 创建文件夹并检查文件夹是否存在 以及读取的权限
-     */
-    private void makeDir() {
-
-        // 创建文件夹
-        if (!destDir.exists()) {
-            destDir.mkdirs();
-            Log.d("CheckOnActivity", "正在创建文件夹");
-        } else {
-            Log.d("CheckOnActivity", "文件夹存在");
-        }
-        if (destDir.canRead()) {
-            Log.d("CheckOnActivity", "文件夹可以读");
-        }
-        if (destDir.canWrite()) {
-            Log.d("CheckOnActivity", "文件夹可以写");
-            Log.d("CheckOnActivity", destDir.getAbsolutePath());
-        } else {
-            destDir.setWritable(true);
-        }
-    }
 
     /**
      * 设置按钮的点击事件

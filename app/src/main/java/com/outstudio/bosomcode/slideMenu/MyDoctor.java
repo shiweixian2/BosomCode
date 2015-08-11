@@ -13,6 +13,6 @@ public class MyDoctor extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.call_help);
+        setContentView(R.layout.my_doctor);
     }
 }
