@@ -90,6 +90,10 @@
             android:background="@drawable/right_fragment_remind_bt_icon"
             android:scaleType="fitCenter" />
     </FrameLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_purple" />
 
     <ListView
         android:id="@+id/add_remind_set_time_listView"

@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.outstudio.bosomcode.R;
-import com.outstudio.bosomcode.utils.Utils;
+import com.outstudio.bosomcode.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,7 +61,7 @@ public class LeftFragment extends Fragment {
      */
     private void initView(View view){
         listView = (ListView) view.findViewById(R.id.left_fragment_listView);
-        date = Utils.getDate();
+        date = DateUtil.getDate();
         SimpleAdapter adapter = new SimpleAdapter(getActivity(),getData(),
                 R.layout.for_left_fragment_listview,new String[]{NAME_FLAG,SOURCE_FLAG,
                 PUBLISH_TIME_FLAG,IMAGE_FLAG},new int[]{R.id.left_fragment_medicine_name,

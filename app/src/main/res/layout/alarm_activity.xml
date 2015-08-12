@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/alarm_activity_textView"
+        android:layout_marginTop="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="35sp"
+        android:textColor="@color/purple"
+        android:text="@string/alarm_activity_text1"
+        />
+    <TextView
+        android:layout_below="@id/alarm_activity_textView"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/purple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="35sp"
+        android:text="@string/alarm_activity_text2"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tip"
+        android:background="@drawable/ic_launcher"
+        android:layout_marginBottom="3dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/alarm_activity_close_tip_text"/>
+
+</RelativeLayout>

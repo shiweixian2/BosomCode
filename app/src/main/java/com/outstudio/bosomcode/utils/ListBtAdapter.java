@@ -123,4 +123,9 @@ public class ListBtAdapter extends BaseAdapter {
             }
         }
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 }

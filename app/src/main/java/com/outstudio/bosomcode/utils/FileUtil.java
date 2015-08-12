@@ -28,7 +28,7 @@ public class FileUtil {
 
 
     public static final String rootDirectory = Environment
-            .getExternalStorageDirectory().toString() + File.separator + "BosomCode" + File.separator;
+            .getExternalStorageDirectory().toString() + "/BosomCode/";
 
     /**
      * 创建文件夹并检查文件夹是否存在 以及读取的权限

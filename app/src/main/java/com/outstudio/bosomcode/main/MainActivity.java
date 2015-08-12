@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.outstudio.bosomcode.R;
 import com.outstudio.bosomcode.utils.BottomTab;
 import com.outstudio.bosomcode.utils.MyScrollView;
-import com.outstudio.bosomcode.utils.Utils;
+import com.outstudio.bosomcode.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,7 +70,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mSwitchMenu = (MyScrollView) findViewById(R.id.slide_menu);
         menuListView = (ListView) findViewById(R.id.slide_menu_listView);
         dateText = (TextView)findViewById(R.id.date_textView);
-        date = Utils.getDate();
+        date = DateUtil.getDate();
         dateText.setText(date);
         mViewpager = (ViewPager) findViewById(R.id.main_tab_viewpager);
         BottomTab one = (BottomTab) findViewById(R.id.main_tab_one);

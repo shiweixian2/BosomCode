@@ -72,4 +72,15 @@
     <string name="add_remind_add_medicine_bt_text">添 加 新 药 品</string>
     <string name="add_remind_set_time_meal_tip_text">请选择饭前还是饭后:</string>
     <string name="add_remind_set_time_add_time_text">点 击 添 加 用 药 时 间</string>
+
+    <!--闹钟界面-->
+    <string name="alarm_activity_close_tip_text">向 上 滑 动 关 闭</string>
+    <string name="alarm_activity_text1">主人,</string>
+    <string name="alarm_activity_text2">用药时间到啦!</string>
+
+    <!--用药提示-->
+    <string name="medication_prompts_medicine_tip">用 药 提 示</string>
+    <string name="medication_prompts_doctor_tip">联 系 医 生</string>
+    <string name="medication_prompts_doctor_name_tip">姓  名</string>
+    <string name="medication_prompts_doctor_phone_tip">电  话</string>
 </resources>

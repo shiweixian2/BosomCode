@@ -2,10 +2,11 @@ package com.outstudio.bosomcode.right;
 
 import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
@@ -27,23 +28,31 @@ public class SetTime extends Activity implements View.OnClickListener {
 
     private Button addBt = null;
     private ListView listView = null;
-    private Button cancelBt = null;
-    private Button confirmBt = null;
+    private ImageButton cancelBt = null;
+    private ImageButton confirmBt = null;
     //  private RadioButton beforeRadio = null;
 //  private RadioButton afterRadio = null;
     private RadioGroup radioGroup = null;
     private List<Map<String, Object>> listItems = new ArrayList<>();
-    private List<Map<String, Object>> timeList = new ArrayList<>();
+    private ArrayList<Integer> hourList = new ArrayList<>();
+    private ArrayList<Integer> minuteList = new ArrayList<>();
+    private ArrayList<Integer> mealList = new ArrayList<>();
     private SimpleAdapter simpleAdapter = null;
     private static final String ICON_FLAG = "icon_flag";
     private static final String TIME_FLAG = "time_flag";
     private static final String MEAL_FLAG = "meal_flag";
-    public static final String HOUR_FLAG = "hour_flag";
-    public static final String MINUTE_FALG = "minute_flag";
+    public static final String HOUR_KEY = "hour_key";
+    public static final String MINUTE_KEY = "minute_key";
+    public static final String MEAL_KEY = "meal_key";
+    public static final String BUNDLE_KEY = "set_time_bundle_key";
+    public static final int RESULT_CODE = 1000;
 
     private String meal = "饭后";
+    public static final int BEFORE_MEAL_FLAG = 1;
+    public static final int AFTER_MEAL_FLAG = 2;
+    private int meal_flag = 0;
 
-    private int count = 0;
+//    public static final String DATA_FLAG = "data_flag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,8 @@ public class SetTime extends Activity implements View.OnClickListener {
         addBt = (Button) findViewById(R.id.add_remind_set_time_add_time_bt);
         listView = (ListView) findViewById(R.id.add_remind_set_time_listView);
         radioGroup = (RadioGroup) findViewById(R.id.add_remind_set_time_radioGroup);
+        cancelBt = (ImageButton) findViewById(R.id.add_remind_set_time_cancel_bt);
+        confirmBt = (ImageButton) findViewById(R.id.add_remind_set_time_confirm_bt);
         simpleAdapter = new SimpleAdapter(this, getData(), R.layout.for_add_remind_set_time_fragment_listview,
                 new String[]{ICON_FLAG, TIME_FLAG, MEAL_FLAG}, new int[]{R.id.add_remind_set_time_clock,
                 R.id.add_remind_set_time_text, R.id.add_remind_set_meal_text});
@@ -62,10 +73,13 @@ public class SetTime extends Activity implements View.OnClickListener {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 meal = checkedId == R.id.add_remind_before_meal_radio ? "饭前" : "饭后";
+                setMealData(meal);
                 simpleAdapter.notifyDataSetChanged();
             }
         });
         addBt.setOnClickListener(this);
+        cancelBt.setOnClickListener(this);
+        confirmBt.setOnClickListener(this);
     }
 
     /**
@@ -77,7 +91,8 @@ public class SetTime extends Activity implements View.OnClickListener {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 setData(hourOfDay, minute);
-                setTimeData(hourOfDay, minute);
+                setHourData(hourOfDay);
+                setMinuteData(minute);
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
 
@@ -112,8 +127,6 @@ public class SetTime extends Activity implements View.OnClickListener {
         map.put(MEAL_FLAG, meal);
         listItems.add(map);
         simpleAdapter.notifyDataSetChanged();
-        Log.e("test", "" + count);
-        count++;
     }
 
     /**
@@ -129,29 +142,72 @@ public class SetTime extends Activity implements View.OnClickListener {
      * 清除数据
      */
     private void removeAllListData() {
-        for (int i = 0; i < listItems.size(); i++) {
-            listItems.remove(i);
+        while (listItems.size() != 0) {
+            listItems.remove(0);
         }
-        for (int i = 0; i < timeList.size(); i++) {
-            timeList.remove(i);
+        while (hourList.size() != 0) {
+            hourList.remove(0);
+        }
+        while (minuteList.size() != 0) {
+            minuteList.remove(0);
         }
         simpleAdapter.notifyDataSetChanged();
     }
 
     /**
-     * 存储时间数据
+     * 存储小时数据
+     *
      * @param hourOfDay
-     * @param minute
      */
-    private void setTimeData(int hourOfDay, int minute) {
-        Map<String, Object> map = new HashMap<>();
-        map.put(HOUR_FLAG, hourOfDay);
-        map.put(MINUTE_FALG, minute);
-        timeList.add(map);
+    private void setHourData(int hourOfDay) {
+        hourList.add(hourOfDay);
     }
 
-    public List<Map<String, Object>> getTimeData() {
-        return timeList;
+    /**
+     * 存储分钟数据
+     *
+     * @param minute
+     */
+    private void setMinuteData(int minute) {
+        minuteList.add(minute);
+    }
+    /**
+     * 存储饭前饭后数据
+     *
+     * @param meal
+     */
+    private void setMealData(String meal) {
+        if (meal.equals("饭前")){
+            meal_flag = BEFORE_MEAL_FLAG;
+            mealList.add(meal_flag);
+        }else if (meal.equals("饭后")){
+            meal_flag = AFTER_MEAL_FLAG;
+            mealList.add(meal_flag);
+        }
+    }
+
+    private ArrayList<Integer> getHourData() {
+        return hourList;
+    }
+
+    private ArrayList<Integer> getMinuteData() {
+        return minuteList;
+    }
+    private ArrayList<Integer> getMealData() {
+        return mealList;
+    }
+
+    /**
+     * 发送数据回AddRemind类
+     */
+    private void sendResult(){
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putIntegerArrayList(HOUR_KEY,getHourData());
+        bundle.putIntegerArrayList(MINUTE_KEY,getMinuteData());
+        bundle.putIntegerArrayList(MEAL_KEY, getMealData());
+        intent.putExtra(BUNDLE_KEY, bundle);
+        this.setResult(RESULT_CODE,intent);
     }
 
     @Override
@@ -165,6 +221,7 @@ public class SetTime extends Activity implements View.OnClickListener {
                 this.finish();
                 break;
             case R.id.add_remind_set_time_confirm_bt:
+                sendResult();
                 this.finish();
                 break;
         }

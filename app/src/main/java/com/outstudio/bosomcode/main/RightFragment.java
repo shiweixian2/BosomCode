@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -16,6 +15,7 @@ import android.widget.ViewFlipper;
 
 import com.outstudio.bosomcode.R;
 import com.outstudio.bosomcode.right.AddRemind;
+import com.outstudio.bosomcode.right.SetTime;
 import com.outstudio.bosomcode.utils.ListBtAdapter;
 
 import java.util.ArrayList;
@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 目前尚待解决:只能一次添加闹钟提醒,待下次解决
+ * <p>
  * Created by mima123 on 15/8/6.
  */
 public class RightFragment extends ListFragment implements View.OnClickListener {
@@ -35,16 +37,17 @@ public class RightFragment extends ListFragment implements View.OnClickListener 
             R.drawable.right_ftagment_medicine_info, R.drawable.right_ftagment_medicine_info,
             R.drawable.right_ftagment_medicine_info};
 
-    //listView的数据
-    private int[] icons = {R.drawable.right_fragment_morning_clock,
-            R.drawable.right_fragment_afternooon_clock, R.drawable.right_fragment_night_clock};
-    private String[] time = {"08:00", "13:00", "19:00"};
-    private String[] beforeOrAfter = {"饭后", "饭后", "饭后"};
 
     private String ICON_FLAG = "icon_flag";
-    private String TIME_1_FLAG = "time_1_flag";
+    private String TIME_FLAG = "time_1_flag";
     private String MEAL_FLAG = "meal_flag";
     private String BT_FLAG = "bt_flag";
+
+    private static final int RIGHT_REQUEST_CODE = 110;
+    private ArrayList<Integer> hourList = null;
+    private ArrayList<Integer> minuteList = null;
+    private ArrayList<Integer> mealList = null;
+    String meal = "";
 
     @Nullable
     @Override
@@ -79,7 +82,6 @@ public class RightFragment extends ListFragment implements View.OnClickListener 
         //开始播放
         flipper.startFlipping();
         flipper.setOnClickListener(this);
-        setListViewAdapter(listView);
         addRemindBt.setOnClickListener(this);
     }
 
@@ -102,12 +104,35 @@ public class RightFragment extends ListFragment implements View.OnClickListener 
      */
     private ArrayList<HashMap<String, Object>> getListViewData() {
         ArrayList<HashMap<String, Object>> listItems = new ArrayList<>();
-        for (int i = 0; i < time.length; i++) {
+        for (int i = 0; i < hourList.size(); i++) {
             HashMap<String, Object> map = new HashMap<>();
-            map.put(ICON_FLAG, icons[i]);
-            map.put(TIME_1_FLAG, time[i]);
-            map.put(MEAL_FLAG, beforeOrAfter[i]);
-            map.put(BT_FLAG, R.drawable.right_fragment_edit_icon);
+            String hourStr = "" + hourList.get(i);
+            String minuteStr = "" + minuteList.get(i);
+            //为了让数据更好看
+            if (hourList.get(i) < 10) {
+                hourStr = "0" + hourList.get(i);
+            }
+            if (minuteList.get(i) < 10) {
+                minuteStr = "0" + minuteList.get(i);
+            }
+            String time = hourStr + ":" + minuteStr;
+            //根据不同时间段设置不同颜色的闹钟
+            if (6 <= hourList.get(i) && hourList.get(i) < 12) {
+                map.put(ICON_FLAG, R.drawable.right_fragment_morning_clock);
+            } else if (hourList.get(i) > 12 && hourList.get(i) < 18) {
+                map.put(ICON_FLAG, R.drawable.right_fragment_afternooon_clock);
+            } else {
+                map.put(ICON_FLAG, R.drawable.right_fragment_night_clock);
+            }
+            //设置用药时间
+            map.put(TIME_FLAG, time);
+            if (mealList.get(i) == SetTime.BEFORE_MEAL_FLAG) {
+                meal = "饭前";
+            } else if (mealList.get(i) == SetTime.AFTER_MEAL_FLAG) {
+                meal = "饭后";
+            }
+            //设置饭前或者饭后用药
+            map.put(MEAL_FLAG, meal);
             listItems.add(map);
         }
         return listItems;
@@ -119,14 +144,15 @@ public class RightFragment extends ListFragment implements View.OnClickListener 
     private void setListViewAdapter(ListView listView) {
         //生成适配器的Item和动态数组对应的元素
         ListBtAdapter listBtAdapter = new ListBtAdapter(getActivity(), getListViewData(),
-                R.layout.for_right_fragment_listview, new String[]{ICON_FLAG, TIME_1_FLAG,
+                R.layout.for_right_fragment_listview, new String[]{ICON_FLAG, TIME_FLAG,
                 MEAL_FLAG, BT_FLAG}, new int[]{R.id.right_fragment_clock, R.id.right_fragment_time,
                 R.id.right_fragment_meal, R.id.right_fragment_edit_bt});
         listView.setAdapter(listBtAdapter);
     }
 
     /**
-     *listView监听事件
+     * listView监听事件
+     *
      * @param
      * @param v
      * @param position
@@ -146,8 +172,22 @@ public class RightFragment extends ListFragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.right_fragment_add_remind_bt:
                 intent = new Intent(getActivity(), AddRemind.class);
-                startActivity(intent);
+                startActivityForResult(intent, RIGHT_REQUEST_CODE);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RIGHT_REQUEST_CODE) {
+            if (resultCode == AddRemind.RESULT_CODE) {
+                Bundle bundle = data.getBundleExtra(SetTime.BUNDLE_KEY);
+                hourList = bundle.getIntegerArrayList(SetTime.HOUR_KEY);
+                minuteList = bundle.getIntegerArrayList(SetTime.MINUTE_KEY);
+                mealList = bundle.getIntegerArrayList(SetTime.MEAL_KEY);
+                setListViewAdapter(listView);
+            }
         }
     }
 }

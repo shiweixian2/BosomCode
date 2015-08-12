@@ -8,15 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.outstudio.bosomcode.R;
 import com.outstudio.bosomcode.center.ShareThought;
-import com.outstudio.bosomcode.utils.Utils;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.outstudio.bosomcode.right.AlarmActivity;
 
 /**
  * 目前存在的问题,无法使用手势
@@ -87,6 +83,8 @@ public class CenterFragment extends Fragment implements View.OnClickListener {
             case R.id.center_fragment_scanCode_bt:
                 break;
             case R.id.center_fragment_personal_specialist_bt:
+                intent = new Intent(getActivity(), AlarmActivity.class);
+                startActivity(intent);
                 break;
             case R.id.center_fragment_share_bt:
                 intent = new Intent(getActivity(), ShareThought.class);
