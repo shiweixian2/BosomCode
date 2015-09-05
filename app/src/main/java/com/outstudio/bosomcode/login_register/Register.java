@@ -3,14 +3,29 @@ package com.outstudio.bosomcode.login_register;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.outstudio.bosomcode.R;
+import com.outstudio.bosomcode.network.MyApplication;
+import com.outstudio.bosomcode.network.VolleyInterface;
+import com.outstudio.bosomcode.network.VolleyRequest;
+import com.outstudio.bosomcode.right.SetTime;
 import com.outstudio.bosomcode.utils.ToMD5;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 注册界面
@@ -31,9 +46,9 @@ public class Register extends Activity implements View.OnClickListener {
     private String username = null;
     private String pwd = null;
 
-    public static final String USERNAME_FLAG = "username_flag";
-    public static final String PASSWORD_FLAG = "password_flag";
-    public static final String BUNDLE_FLAG = "bundle_flag";
+//    public static final String USERNAME_FLAG = "username_flag";
+//    public static final String PASSWORD_FLAG = "password_flag";
+//    public static final String BUNDLE_FLAG = "bundle_flag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +83,7 @@ public class Register extends Activity implements View.OnClickListener {
                 if (localRight) {
                     username = ToMD5.getMD5(usernamePre);
                     pwd = ToMD5.getMD5(pwdPre);
-                    boolean ok = verifyInfoNetwork(username, pwd);
-                    if (ok) {
-                        intent = new Intent(Register.this, RegisterSucceed.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString(USERNAME_FLAG, username);
-                        bundle.putString(PASSWORD_FLAG, pwd);
-                        intent.putExtra(BUNDLE_FLAG, bundle);
-                        startActivity(intent);
-                    }
+                    registerInNetwork(username, pwd);
                 }
                 break;
             case R.id.register_back_to_login:
@@ -102,7 +109,7 @@ public class Register extends Activity implements View.OnClickListener {
         } else if (pwdPre.isEmpty() || pwdPre.equals("")) {
             showTip("密码不能为空");
             return false;
-        } else if (pwdConfirmPre.isEmpty() || pwdConfirmPre.equals("") || !pwd.equals(pwdConfirmPre)) {
+        } else if (pwdConfirmPre.isEmpty() || pwdConfirmPre.equals("") || !pwdPre.equals(pwdConfirmPre)) {
             showTip("两次密码不一致");
             return false;
         } else {
@@ -111,15 +118,104 @@ public class Register extends Activity implements View.OnClickListener {
     }
 
     /**
-     * 网络验证用户的登录信息
+     * 验证及注册
      *
      * @param username
      * @param password
      * @return
      */
-    private boolean verifyInfoNetwork(String username, String password) {
-        return true;
+    private void registerInNetwork(final String username, final String password) {
+
+        VolleyRequest.RequestGet(Constant.REGISTER_CHECK_USER_URL + "&email=" + username, Constant.REGISTER_TAG,
+                new VolleyInterface(this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+                    @Override
+                    public void onMySuccess(JSONObject jsonObject) {
+                        Log.e("json", jsonObject.toString());
+                        try {
+                            String checkResult = jsonObject.getString(Constant.RESPONSE_KEY);
+                            Log.e("check", "" + checkResult);
+                            if (checkResult.equals(Constant.REGISTER_ACCOUNT_CAN_USE)) {
+                                Log.e("zhuce", "正在注册");
+                                Log.e("usernamePre", usernamePre);
+                                Log.e("pwdPre", pwdPre);
+//                                Map<String, String> registerMap = new HashMap<>();
+//                                registerMap.put("email", usernamePre);
+//                                registerMap.put(Constant.PASSWORD_KEY, pwdPre);
+//                                VolleyRequest.RequestPost(Constant.REGISTER_URL, registerMap, Constant.REGISTER_TAG,
+//                                        new VolleyInterface(Register.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+//                                            @Override
+//                                            public void onMySuccess(JSONObject jsonObject) {
+//                                                try {
+//                                                    String registerResult = jsonObject.getString(Constant.RESPONSE_KEY);
+//                                                    Log.e("registerResult", "" + registerResult);
+//                                                    Log.e("REGISTER_SUCCESS", "" + Constant.REGISTER_SUCCESS);
+//                                                    Log.e("username", username);
+//                                                    Log.e("password", password);
+//                                                    if (registerResult.equals(Constant.REGISTER_SUCCESS)) {
+//                                                        Log.e("zhuce", "注册成功");
+//                                                        Intent intent = new Intent(Register.this, RegisterSucceed.class);
+//                                                        Bundle bundle = new Bundle();
+//                                                        bundle.putString(Constant.USERNAME_FLAG, username);
+//                                                        bundle.putString(Constant.PASSWORD_FLAG, password);
+//                                                        intent.putExtra(Constant.BUNDLE_FLAG, bundle);
+//                                                        startActivity(intent);
+//                                                        Register.this.finish();
+//                                                    }
+//                                                } catch (JSONException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//                                            }
+//
+//                                            @Override
+//                                            public void onMyError(VolleyError volleyError) {
+//                                                showTip("网络原因,注册失败!");
+//                                            }
+//                                        });
+
+                                VolleyRequest.RequestGet(Constant.REGISTER_URL+"&email="+usernamePre+"&password="+pwdPre, Constant.REGISTER_TAG, new VolleyInterface(Register.this,
+                                        VolleyInterface.mListener,VolleyInterface.mErrorListener) {
+                                    @Override
+                                    public void onMySuccess(JSONObject jsonObject) {
+                                        Log.e("json",jsonObject.toString());
+                                        String registerResult = null;
+                                        try {
+                                            registerResult = jsonObject.getString(Constant.RESPONSE_KEY);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (registerResult.equals(Constant.REGISTER_SUCCESS)) {
+                                            Log.e("zhuce", "注册成功");
+                                            Intent intent = new Intent(Register.this, RegisterSucceed.class);
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString(Constant.USERNAME_FLAG, usernamePre);
+                                            bundle.putString(Constant.PASSWORD_FLAG, pwdPre);
+                                            intent.putExtra(Constant.BUNDLE_FLAG, bundle);
+                                            startActivity(intent);
+                                            Register.this.finish();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onMyError(VolleyError volleyError) {
+
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onMyError(VolleyError volleyError) {
+                        showTip("连接出错");
+                        Log.e("volleyError", volleyError.toString());
+                    }
+                });
+
+
     }
+
 
     private void showTip(String content) {
         Toast.makeText(Register.this, content, Toast.LENGTH_SHORT).show();

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/main_bg"
     android:padding="20dp">
 
     <TextView
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textColor="@color/purple"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <TextView
@@ -75,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:textColor="@color/purple" />
+                android:textColor="@color/purple"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/medication_prompts_doctor_phone"
@@ -83,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
+                android:textSize="20sp"
                 android:textColor="@color/purple" />
         </LinearLayout>
     </LinearLayout>

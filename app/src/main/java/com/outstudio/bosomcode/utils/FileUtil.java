@@ -26,9 +26,15 @@ public class FileUtil {
         return fileUtil;
     }
 
-
     public static final String rootDirectory = Environment
             .getExternalStorageDirectory().toString() + "/BosomCode/";
+
+    public static final String ALARM_FILE_PATH = rootDirectory + "AddRemind/FilePath/";
+    public static final String ALARM_CONTENT_FILE_PATH = ALARM_FILE_PATH + "CONTENT";
+    public static final String ALARM_HOUR_FILE_PATH = ALARM_FILE_PATH + "HOUR";
+    public static final String ALARM_MINUTE_FILE_PATH = ALARM_FILE_PATH + "MINUTE";
+    public static final String ALARM_MEAL_FILE_PATH = ALARM_FILE_PATH + "MEAL";
+    public static final String ALARM_TEST_FILE_PATH = ALARM_FILE_PATH + "TEST";
 
     /**
      * 创建文件夹并检查文件夹是否存在 以及读取的权限

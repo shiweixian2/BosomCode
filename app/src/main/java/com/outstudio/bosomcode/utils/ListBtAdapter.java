@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.outstudio.bosomcode.R;
 
 import java.util.ArrayList;
@@ -18,12 +17,14 @@ import java.util.HashMap;
 /**
  * Created by mima123 on 15/8/7.
  */
-public class ListBtAdapter extends BaseAdapter {
+public class ListBtAdapter extends BaseAdapter
+{
 
     /**
      * 内部类
      */
-    private class ButtonViewHolder {
+    private class ButtonViewHolder
+    {
         ImageView clockIcon;
         TextView timeText;
         TextView mealText;
@@ -47,7 +48,8 @@ public class ListBtAdapter extends BaseAdapter {
      * @param from
      * @param to
      */
-    public ListBtAdapter(Context context, ArrayList<HashMap<String, Object>> appList, int resource, String[] from, int[] to) {
+    public ListBtAdapter(Context context, ArrayList<HashMap<String, Object>> appList, int resource, String[] from, int[] to)
+    {
         mContext = context;
         mAppList = appList;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,26 +61,45 @@ public class ListBtAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return mAppList.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position)
+    {
         return mAppList.get(position);
     }
 
+    public void removeItem(int position)
+    {
+        mAppList.remove(position);
+    }
+
+    public void removeAllItems()
+    {
+        for (int i = 0; i < mAppList.size(); i++)
+        {
+            mAppList.remove(0);
+        }
+    }
+
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return position;
     }
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView != null) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        if (convertView != null)
+        {
             holder = (ButtonViewHolder) convertView.getTag();
-        } else {
+        } else
+        {
             //初始化界面组件
             convertView = mInflater.inflate(mResource, null);
             holder = new ButtonViewHolder();
@@ -89,7 +110,8 @@ public class ListBtAdapter extends BaseAdapter {
             convertView.setTag(holder);
         }
         HashMap<String, Object> appInfo = mAppList.get(position);
-        if (appInfo != null) {
+        if (appInfo != null)
+        {
             int clockId = (Integer) appInfo.get(keyString[0]);
             String time = (String) appInfo.get(keyString[1]);
             String meal = (String) appInfo.get(keyString[2]);
@@ -103,18 +125,22 @@ public class ListBtAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ListBtListener implements View.OnClickListener {
+    class ListBtListener implements View.OnClickListener
+    {
 
         private int position;
 
-        ListBtListener(int position) {
+        ListBtListener(int position)
+        {
             this.position = position;
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             int vid = v.getId();
-            if (vid == holder.editBt.getId()) {
+            if (vid == holder.editBt.getId())
+            {
                 /*
                 *书写按钮的监听事件
                  */
@@ -125,7 +151,8 @@ public class ListBtAdapter extends BaseAdapter {
     }
 
     @Override
-    public void notifyDataSetChanged() {
+    public void notifyDataSetChanged()
+    {
         super.notifyDataSetChanged();
     }
 }

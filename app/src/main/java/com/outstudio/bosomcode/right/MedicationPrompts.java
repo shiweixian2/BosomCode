@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.outstudio.bosomcode.R;
+import com.outstudio.bosomcode.main.RightFragment;
+
 
 /**
  * Created by mima123 on 15/8/12.
@@ -22,10 +24,15 @@ public class MedicationPrompts extends Activity {
         promptsTextView = (TextView) findViewById(R.id.medication_prompts_textView);
         nameTextView = (TextView) findViewById(R.id.medication_prompts_doctor_name);
         phoneTextView = (TextView) findViewById(R.id.medication_prompts_doctor_phone);
-
+        loadData();
     }
 
-    private void laadData(){
+    /**
+     * 读取提示文档
+     */
+    private void loadData() {
 
+        String prompts = getIntent().getBundleExtra(RightFragment.BUNDLE_KEY).getString(RightFragment.PROMPTS_KEY);
+        promptsTextView.setText(prompts);
     }
 }

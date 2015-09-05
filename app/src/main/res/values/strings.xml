@@ -4,6 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+
     <!-- 登录界面-->
     <string name="login_tip_one">知 心 药 码</string>
     <string name="login_tip_two">您    的    健    康    管    家</string>
@@ -41,10 +42,19 @@
     <string name="right_fragment_add_detector">添 加 用 药 提 醒</string>
 
 
+    <!--添加用药提醒-->
+    <string name="add_remind_title_text">添 加 提 醒</string>
+    <string name="add_remind_medicine_name_text">药品名称：</string>
+    <string name="add_remind_medicine_comment_text">药品备注：</string>
+
+    <!-- 设置界面-->
+    <string name="set_exit_account">注 销 账 号</string>
+
     <!--侧滑菜单界面-->
     <string name="for_test">小娜</string>
     <string name="slide_menu_collection">我的收藏</string>
     <string name="slide_menu_medical_history">我的病史</string>
+    <string name="slide_menu_medicine_avoid">用药禁忌</string>
     <string name="slide_menu_my_doctor">我的医生</string>
     <string name="slide_menu_keep_health">养生良方</string>
     <string name="slide_menu_cure_disease">治病灵药</string>
@@ -83,4 +93,7 @@
     <string name="medication_prompts_doctor_tip">联 系 医 生</string>
     <string name="medication_prompts_doctor_name_tip">姓  名</string>
     <string name="medication_prompts_doctor_phone_tip">电  话</string>
+
+
+    <string name="medicine_avoid_text">1.忌辛辣,海鲜\n2.忌降压操之过急\n3.忌单一用药\n4.忌不测血压服药\n5.忌间断服降压药\n6.忌无症状不服药\n7.忌临睡前服降压药\n8.忌解热镇痛类药物</string>
 </resources>

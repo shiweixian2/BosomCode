@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 import com.outstudio.bosomcode.R;
+import com.outstudio.bosomcode.center.QRScanActivity;
 import com.outstudio.bosomcode.center.ShareThought;
-import com.outstudio.bosomcode.right.AlarmActivity;
 
 /**
  * 目前存在的问题,无法使用手势
- *
+ * <p/>
  * Created by mima123 on 15/8/6.
  */
 public class CenterFragment extends Fragment implements View.OnClickListener {
@@ -79,12 +79,14 @@ public class CenterFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Intent intent;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.center_fragment_scanCode_bt:
+                intent = new Intent(getActivity(), QRScanActivity
+                        .class);
+                startActivity(intent);
                 break;
             case R.id.center_fragment_personal_specialist_bt:
-                intent = new Intent(getActivity(), AlarmActivity.class);
-                startActivity(intent);
+//                startActivity(intent);
                 break;
             case R.id.center_fragment_share_bt:
                 intent = new Intent(getActivity(), ShareThought.class);

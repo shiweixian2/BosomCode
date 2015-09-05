@@ -13,4 +13,11 @@
     <color name="share_thought_bt_inner">#dfd9d0</color>
     <color name="share_thought_bt_outer">#562e3d</color>
 
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
 </resources>

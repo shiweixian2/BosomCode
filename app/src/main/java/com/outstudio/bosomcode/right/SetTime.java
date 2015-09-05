@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -73,7 +74,6 @@ public class SetTime extends Activity implements View.OnClickListener {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 meal = checkedId == R.id.add_remind_before_meal_radio ? "饭前" : "饭后";
-                setMealData(meal);
                 simpleAdapter.notifyDataSetChanged();
             }
         });
@@ -126,6 +126,7 @@ public class SetTime extends Activity implements View.OnClickListener {
         map.put(TIME_FLAG, time);
         map.put(MEAL_FLAG, meal);
         listItems.add(map);
+        setMealData(meal);
         simpleAdapter.notifyDataSetChanged();
     }
 
@@ -171,18 +172,21 @@ public class SetTime extends Activity implements View.OnClickListener {
     private void setMinuteData(int minute) {
         minuteList.add(minute);
     }
+
     /**
      * 存储饭前饭后数据
      *
      * @param meal
      */
     private void setMealData(String meal) {
-        if (meal.equals("饭前")){
+        if (meal.equals("饭前")) {
             meal_flag = BEFORE_MEAL_FLAG;
             mealList.add(meal_flag);
-        }else if (meal.equals("饭后")){
+            Log.d("SetTime.setMealData", "饭前");
+        } else if (meal.equals("饭后")) {
             meal_flag = AFTER_MEAL_FLAG;
             mealList.add(meal_flag);
+            Log.d("SetTime.setMealData", "饭后");
         }
     }
 
@@ -193,6 +197,7 @@ public class SetTime extends Activity implements View.OnClickListener {
     private ArrayList<Integer> getMinuteData() {
         return minuteList;
     }
+
     private ArrayList<Integer> getMealData() {
         return mealList;
     }
@@ -200,14 +205,14 @@ public class SetTime extends Activity implements View.OnClickListener {
     /**
      * 发送数据回AddRemind类
      */
-    private void sendResult(){
+    private void sendResult() {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList(HOUR_KEY,getHourData());
-        bundle.putIntegerArrayList(MINUTE_KEY,getMinuteData());
+        bundle.putIntegerArrayList(HOUR_KEY, getHourData());
+        bundle.putIntegerArrayList(MINUTE_KEY, getMinuteData());
         bundle.putIntegerArrayList(MEAL_KEY, getMealData());
         intent.putExtra(BUNDLE_KEY, bundle);
-        this.setResult(RESULT_CODE,intent);
+        this.setResult(RESULT_CODE, intent);
     }
 
     @Override

@@ -2,8 +2,11 @@ package com.outstudio.bosomcode.login_register;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +17,14 @@ import android.widget.Toast;
 import com.outstudio.bosomcode.main.MainActivity;
 import com.outstudio.bosomcode.R;
 import com.outstudio.bosomcode.utils.ToMD5;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * 登录界面
@@ -34,6 +45,33 @@ public class Login extends Activity implements View.OnClickListener {
     private String username = null;
     //加密后的密码
     private String password = null;
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
+    public static final String SHARE_NAME = "bosomcode";
+    public static final String SHARE_USERNAME = "share_username";
+    public static final String SHARE_PASSWORD = "share_password";
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0x123) {
+                Log.e("handler", "收到数据");
+                Log.d("username", usernameEdit.getText().toString());
+                Log.d("username_md5", username);
+                Log.d("password", passwordEdit.getText().toString());
+                Log.d("password_md5", password);
+                showTip("登录成功");
+                saveInfo(usernamePre, passwordPre);
+                Log.e("share","保存用户信息成功");
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+                Login.this.finish();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +94,8 @@ public class Login extends Activity implements View.OnClickListener {
         loginBt.setOnClickListener(this);
         toRegisterBt.setOnClickListener(this);
         forgetPwd.setOnClickListener(this);
+        usernameEdit.setText("swxjzt@126.com");
+        passwordEdit.setText("1234567");
     }
 
     @Override
@@ -71,20 +111,8 @@ public class Login extends Activity implements View.OnClickListener {
                 if (isRightInfo) {
                     username = ToMD5.getMD5(usernamePre);
                     password = ToMD5.getMD5(passwordPre);
-                    boolean ok = verifyInfoNetwork(username, password);
-                    //与数据库交流验证成功
-                    if (ok) {
-                        Log.d("username", usernameEdit.getText().toString());
-                        Log.d("username_md5", username);
-                        Log.d("password", passwordEdit.getText().toString());
-                        Log.d("password_md5", password);
-                        showTip("登录成功");
-                        intent = new Intent(Login.this, MainActivity.class);
-                        startActivity(intent);
-                        this.finish();
-                    } else {
-                        showTip("用户名或密码错误");
-                    }
+                    //登录
+                    LoginInNetwork(usernamePre, passwordPre);
                 }
                 break;
             case R.id.login_register_bt:
@@ -101,19 +129,18 @@ public class Login extends Activity implements View.OnClickListener {
      * @return
      */
     private boolean verifyInfoLocally(String usernamePre, String passwordPre) {
-//        if (usernamePre.isEmpty() || usernamePre.equals("")) {
-//            showTip("邮箱号不能为空");
-//            return false;
-//        } else if (passwordPre.isEmpty() || passwordPre.equals("")) {
-//            showTip("密码不能为空");
-//            return false;
-//        } else if (!usernamePre.matches(".*@.*")) {
-//            showTip("邮箱格式不正确");
-//            return false;
-//        } else {
-//            return true;
-//        }
-        return true;
+        if (usernamePre.isEmpty() || usernamePre.equals("")) {
+            showTip("邮箱号不能为空");
+            return false;
+        } else if (passwordPre.isEmpty() || passwordPre.equals("")) {
+            showTip("密码不能为空");
+            return false;
+        } else if (!usernamePre.matches(".*@.*")) {
+            showTip("邮箱格式不正确");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -123,11 +150,51 @@ public class Login extends Activity implements View.OnClickListener {
      * @param password
      * @return
      */
-    private boolean verifyInfoNetwork(String username, String password) {
-        return true;
+    private void LoginInNetwork(final String username, final String password) {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                /**
+                 * 记得改回来账号,密码
+                 */
+                try {
+                    String json = Jsoup.connect(Constant.LOGIN_URL).ignoreContentType(true).data("email", "swxjzt@126.com").data("password", "1234567").method(Connection.Method.POST).execute().body();
+                    JSONObject object = new JSONObject(json);
+                    int status = object.getInt(Constant.RESPONSE_KEY);
+                    Log.e("status", "" + status);
+                    if (status == Constant.LOGIN_SUCCESS) {
+                        handler.sendEmptyMessage(0x123);
+                    } else {
+                        showTip("用户名或密码错误");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
     }
 
     private void showTip(String content) {
         Toast.makeText(Login.this, content, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 保存登录信息
+     *
+     * @param username
+     * @param password
+     */
+    public void saveInfo(String username, String password) {
+        preferences = getSharedPreferences(SHARE_NAME, MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.clear();
+        editor.putString(SHARE_USERNAME, username);
+        editor.putString(SHARE_PASSWORD, password);
+        editor.commit();
     }
 }
